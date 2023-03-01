@@ -2374,6 +2374,10 @@ func appendField(b []byte, k string, v interface{}) []byte {
 		b = append(b, v...)
 	case nil:
 		// skip
+
+	case time.Time:
+		bt, _ := v.MarshalText()
+		b = append(b, bt...)
 	default:
 		// Can't determine the type, so convert to string
 		b = append(b, '"')
